@@ -30,13 +30,14 @@ dotnet add package FluentValidation.DependencyInjectionExtensions
 ```
 public class GetSomethingQuery
 {
-    public class Request : IRequest<Response> {}
+    public class Request : IRequest<Response> { }
     
-    public class Response { }
-
     public class Validator : AbstractValidator<Request>
     {
-        public Validator() {  /* RuleFor(request => request.FieldName). */ }
+        public Validator() 
+        {
+            // RuleFor(request => request.FieldName).
+        }
     }
 
     public class Handler : IRequestHandler<Request, Response>
@@ -46,5 +47,10 @@ public class GetSomethingQuery
             throw new System.NotImplementedException();
         }
     }
+}
+
+public class Response 
+{
+
 }
 ```
