@@ -1,0 +1,5 @@
+﻿.idea
+.vscode
+*/obj/
+*/bin/
+*.DotSettings.user
