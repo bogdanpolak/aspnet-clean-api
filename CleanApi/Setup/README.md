@@ -28,7 +28,7 @@ dotnet add package FluentValidation.DependencyInjectionExtensions
 ## Template Handler with Validation
 
 ```
-public class Get{Something}Query
+public static class Get{Something}Query
 {
     public class Request : IRequest<Response> { }
     
@@ -41,13 +41,13 @@ public class Get{Something}Query
     }
 }
 
- public class Get{Something}QueryValidator : AbstractValidator<Get{Something}Query.Request>
- {
-     public Validator() 
-     {
-         // RuleFor(request => request.FieldName).
-     }
- }
+public class Get{Something}QueryValidator : AbstractValidator<Get{Something}Query.Request>
+{
+   public Get{Something}QueryValidator() 
+   {
+      // RuleFor(x => x.FieldName).NotNull();
+   }
+}
 
 public class Response 
 {
