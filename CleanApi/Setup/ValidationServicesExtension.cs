@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
  * services.AddMediatR_And_Validations(typeof(..AnyDomainType..).Assembly);
  */
 
-namespace CleanApi.Base.MediatorValidations
+namespace CleanApi.Setup
 {
     public static class ValidationServicesExtension
     {

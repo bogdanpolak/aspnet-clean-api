@@ -26,8 +26,8 @@ namespace CleanApi.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeatherForecastDto>> Get(string location, int days)
         {
-            _logger.LogInformation("[GET] WeatherForecast location='{location}' days={days}", 
-                location, days);
+            _logger.LogInformation("[{request}] location='{location}' days={days}", 
+                "GET WeatherForecast", location, days);
             var forecast = await _mediator.Send(new GetForecastQuery.Request(location, days));
             return MapForecastToDto(forecast); 
         }

@@ -5,13 +5,13 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
-    
+
 /*
  * Startup.cs:
  * app.UseMiddleware<ValidationErrorHandlingMiddleware>();
  */
 
-namespace CleanApi.Base.MediatorValidations 
+namespace CleanApi.Setup 
 {
     public class ValidationErrorHandlingMiddleware 
     {
