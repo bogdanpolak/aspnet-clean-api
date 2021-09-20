@@ -26,22 +26,21 @@ dotnet add package FluentValidation.DependencyInjectionExtensions
    ```
    
 ## Template Handler with Validation
-
+ 
 ```
-public static class Get{Something}Query
-{
-    public class Request : IRequest<Response> { }
+public class Get{Something}Query : IRequest<Response>
+{ 
+}
     
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        public Task<Response> Handle(Request request, CancellationToken cancellationToken)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
+public class Get{Something}QueryHandler : IRequestHandler<Get{Something}Query, Response>
+{
+   public Task<Response> Handle(Get{Something}Query request, CancellationToken cancellationToken)
+   {
+      throw new System.NotImplementedException();
+   }
 }
 
-public class Get{Something}QueryValidator : AbstractValidator<Get{Something}Query.Request>
+public class Get{Something}QueryValidator : AbstractValidator<Get{Something}Query>
 {
    public Get{Something}QueryValidator() 
    {
@@ -54,3 +53,5 @@ public class Response
 
 }
 ```
+
+> Rename `{Something}` => feature name (eg. ImagesSince)

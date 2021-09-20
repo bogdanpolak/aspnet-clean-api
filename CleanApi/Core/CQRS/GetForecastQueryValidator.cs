@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 
-namespace CleanApi.Core
+namespace CleanApi.Core.CQRS
 {
-    public class GetForecastQueryValidator : AbstractValidator<GetForecastQuery.Request>
+    public class GetForecastQueryValidator : AbstractValidator<GetForecastQuery>
     {
         public GetForecastQueryValidator()
         {

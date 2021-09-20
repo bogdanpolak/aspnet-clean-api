@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanApi.Core;
+using CleanApi.Core.CQRS;
+using CleanApi.Core.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -28,7 +29,7 @@ namespace CleanApi.Controllers
         {
             _logger.LogInformation("[{request}] location='{location}' days={days}", 
                 "GET WeatherForecast", location, days);
-            var forecast = await _mediator.Send(new GetForecastQuery.Request(location, days));
+            var forecast = await _mediator.Send(new GetForecastQuery(location, days));
             return MapForecastToDto(forecast); 
         }
 
