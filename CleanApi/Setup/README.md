@@ -16,7 +16,7 @@ dotnet add package FluentValidation.DependencyInjectionExtensions
 
 ## Setup - Project
 
-1. Copy folder `MediatorValidations`
+1. Copy folder that `Setup`
 2. Add registration code to `Setup.cs`
    ```
    services.AddValidationPipeline();
