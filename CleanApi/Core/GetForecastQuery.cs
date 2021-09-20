@@ -2,12 +2,11 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using FluentValidation;
 using MediatR;
 
 namespace CleanApi.Core
 {
-    public class GetForecastQuery
+    public static class GetForecastQuery
     {
         public class Request : IRequest<Forecast>
         {
@@ -18,19 +17,6 @@ namespace CleanApi.Core
             {
                 Location = location;
                 Days = days;
-            }
-        }
-        
-        public class Validator : AbstractValidator<Request>
-        {
-            public Validator()
-            {
-                RuleFor(x => x.Location)
-                    .NotEmpty()
-                    .Matches(@"\w+\/\w+")
-                    .WithMessage("{PropertyName} has incorrect format, expected: country/city");
-                RuleFor(x => x.Days)
-                    .InclusiveBetween(1, 14);
             }
         }
         

@@ -28,18 +28,10 @@ dotnet add package FluentValidation.DependencyInjectionExtensions
 ## Template Handler with Validation
 
 ```
-public class GetSomethingQuery
+public class Get{Something}Query
 {
     public class Request : IRequest<Response> { }
     
-    public class Validator : AbstractValidator<Request>
-    {
-        public Validator() 
-        {
-            // RuleFor(request => request.FieldName).
-        }
-    }
-
     public class Handler : IRequestHandler<Request, Response>
     {
         public Task<Response> Handle(Request request, CancellationToken cancellationToken)
@@ -48,6 +40,14 @@ public class GetSomethingQuery
         }
     }
 }
+
+ public class Get{Something}QueryValidator : AbstractValidator<Get{Something}Query.Request>
+ {
+     public Validator() 
+     {
+         // RuleFor(request => request.FieldName).
+     }
+ }
 
 public class Response 
 {
