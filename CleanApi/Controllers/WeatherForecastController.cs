@@ -30,15 +30,7 @@ namespace CleanApi.Controllers
             _logger.LogInformation("[{request}] location='{location}' days={days}", 
                 "GET WeatherForecast", location, days);
             var forecast = await _mediator.Send(new GetForecastQuery(location, days));
-            return MapForecastToDto(forecast); 
-        }
-
-        private static IEnumerable<WeatherForecastDto> MapForecastToDto(Forecast forecast)
-        {
-            return forecast.Details.Select(det => new WeatherForecastDto
-            {
-                Date = det.Date, TemperatureC = det.Temperature, Summary = det.Summary
-            });
+            return ForecastMapper.MapToDto(forecast); 
         }
     }
 }

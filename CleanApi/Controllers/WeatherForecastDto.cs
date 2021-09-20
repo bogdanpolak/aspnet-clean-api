@@ -4,6 +4,8 @@ namespace CleanApi.Controllers
 {
     public class WeatherForecastDto
     {
+        public string Location { get; set; }
+        
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }
