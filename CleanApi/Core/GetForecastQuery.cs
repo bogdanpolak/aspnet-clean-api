@@ -39,6 +39,7 @@ namespace CleanApi.Core
             public async Task<Forecast> Handle(Request request, CancellationToken cancellationToken)
             {
                 var rng = new Random();
+                await Task.Delay(0,cancellationToken);
                 return new Forecast
                 {
                     Location = request.Location,
