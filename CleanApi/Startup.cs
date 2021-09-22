@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanApi.Core.Behaviors;
+using CleanApi.Infrastructure;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +40,7 @@ namespace CleanApi
             services.AddMediatR(assembly);
             services.AddValidatorsFromAssembly(assembly);
             // --------------------------------------------
+            services.AddInfrastructureServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

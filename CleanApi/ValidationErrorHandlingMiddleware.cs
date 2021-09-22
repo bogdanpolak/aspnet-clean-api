@@ -47,11 +47,11 @@ namespace CleanApi
             }
             catch (ValidationException ex)
             {
-                await HandleExceptionAsync(context, ex);
+                await HandleValidationExceptionAsync(context, ex);
             }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, ValidationException exception)
+        private static Task HandleValidationExceptionAsync(HttpContext context, ValidationException exception)
         {
             var msg = JsonSerializer.Serialize(
                 new {
