@@ -2,6 +2,7 @@
 launchSettings.json
 
 .vscode
+.vs
 
 */obj/
 */bin/

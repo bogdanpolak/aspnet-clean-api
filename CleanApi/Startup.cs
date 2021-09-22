@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CleanApi.Setup;
+using CleanApi.Core.Behaviors;
+using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,8 +33,12 @@ namespace CleanApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CleanApi", Version = "v1" });
             });
-            services.AddValidationPipeline();
-            services.AddMediatR_And_Validations(typeof(Startup).Assembly);
+            // Clean API: ---------------------------------
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+            var assembly = typeof(Startup).Assembly;
+            services.AddMediatR(assembly);
+            services.AddValidatorsFromAssembly(assembly);
+            // --------------------------------------------
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
