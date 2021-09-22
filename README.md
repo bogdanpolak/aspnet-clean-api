@@ -2,8 +2,10 @@
 
 ASP.NET Core API using MediatR and FluentValidation to separate concerns with middleware for ValidationException error handling. Project contains template and sample ASP.NET Core application which is refactored classic ASP.NET Core API template (Weather Forecast App).
 
-> **Important note:** <br> 
-> `Core` subfolder should be moved to separate `Core.csproj` class library 
+> **Important notes** <br> 
+> * `Core` subfolder should be moved into separate `Core.csproj` class library
+> * `Infrastructure` subfolder should be moved into `Infrastructure.csproj`
+> More info about Clean Architecture: https://jasontaylor.dev/clean-architecture-getting-started/
 
 ## New project setup
 
