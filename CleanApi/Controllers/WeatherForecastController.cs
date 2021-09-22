@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CleanApi.Core.CQRS;
-using CleanApi.Core.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,6 +8,7 @@ namespace CleanApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class WeatherForecastController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -25,7 +23,7 @@ namespace CleanApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<WeatherForecastDto>> Get(string location, int days)
+        public async Task<ForecastResponse> Get(string location, int days)
         {
             _logger.LogInformation("[{request}] location='{location}' days={days}", 
                 "GET WeatherForecast", location, days);
