@@ -16,7 +16,11 @@ ASP.NET Core API using MediatR and FluentValidation to separate concerns with mi
     dotnet add package FluentValidation
     dotnet add package FluentValidation.DependencyInjectionExtensions
     ```
-2. Copy unit `ValidationPipelineBehavior.cs`
+2. Copy/Create units:
+   * `ValidationPipelineBehavior.cs` - [link](CleanApi/Core/Behaviors/ValidationPipelineBehavior.cs)
+   * `ValidationErrorHandlingMiddleware.cs` - [link](CleanApi/ValidationErrorHandlingMiddleware.cs)
+   
+
 3. Update `Startup.cs`:
     ```c#
     // Register method:

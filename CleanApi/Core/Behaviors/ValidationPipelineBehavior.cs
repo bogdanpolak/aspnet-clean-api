@@ -31,4 +31,5 @@ namespace CleanApi.Core.Behaviors
                 throw new ValidationException(failures);
             return await next();
         }
-    }}
+    }
+}
