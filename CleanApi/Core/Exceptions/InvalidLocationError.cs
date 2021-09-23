@@ -2,7 +2,7 @@
 
 namespace CleanApi.Core.Exceptions
 {
-    public class InvalidLocationError : Exception
+    public class InvalidLocationError : CoreException
     {
         public string Location { get; }
 

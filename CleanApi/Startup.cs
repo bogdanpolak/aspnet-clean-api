@@ -58,6 +58,7 @@ namespace CleanApi
             app.UseAuthorization();
 
             app.UseMiddleware<ValidationErrorHandlingMiddleware>();
+            app.UseMiddleware<CoreErrorHandlingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
