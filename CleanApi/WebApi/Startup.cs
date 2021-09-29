@@ -1,4 +1,6 @@
+using CleanApi.Core.Contracts;
 using CleanApi.Infrastructure;
+using CleanApi.WebApi.Utils;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -25,6 +27,8 @@ namespace CleanApi.WebApi
             services.AddValidatorsFromAssembly(assembly);
             // --------------------------------------------
             services.AddInfrastructureServices();
+            services.AddWebApiServices();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

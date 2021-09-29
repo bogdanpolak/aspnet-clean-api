@@ -5,16 +5,16 @@ namespace CleanApi.WebApi.Controllers
 {
     public static class ForecastMapper
     {
-        public static ForecastResponse MapToDto(Forecast forecast)
+        public static ForecastAverageResponse MapForecastToAverageDto(Forecast forecast)
         {
-            return new ForecastResponse
+            return new ForecastAverageResponse
             {
                 Location = forecast.Location,
-                Details = forecast.Details.Select(det => new WeatherForecastDto
+                Details = forecast.Details.Select(det => new ForecastAverageDetailsDto
                 {
                     Location = forecast.Location,
                     Date = det.Date,
-                    TemperatureC = det.Temperature,
+                    TemperatureC = det.TemperatureAvg,
                     Summary = det.Summary
                 })
             };

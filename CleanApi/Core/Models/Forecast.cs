@@ -17,15 +17,10 @@ namespace CleanApi.Core.Models
 
     public class ForecastDetails
     {
-        public DateTime Date { get; }
-        public int Temperature { get; }
-        public string Summary { get; }
-
-        public ForecastDetails(DateTime date, int temperature, string summary)
-        {
-            Date = date;
-            Temperature = temperature;
-            Summary = summary;
-        }
+        public DateTime Date { get; init;  }
+        public int TemperatureAvg { get; init;  }
+        public int TemperatureDay { get; init;  }
+        public int TemperatureNight { get; init;  }
+        public string Summary { get; init; }
     }
 }

@@ -13,11 +13,17 @@ namespace CleanApi.Core.CQRS
     public class GetForecastQueryHandler : IRequestHandler<GetForecastQuery, Forecast>
     {
         private readonly IClimateRepository _climateRepository;
+        private readonly IRandomizer _randomizer;
+        private readonly INowProvider _nowProvider;
 
         public GetForecastQueryHandler(
-            IClimateRepository climateRepository)
+            IClimateRepository climateRepository,
+            IRandomizer randomizer,
+            INowProvider nowProvider)
         {
             _climateRepository = climateRepository;
+            _randomizer = randomizer;
+            _nowProvider = nowProvider;
         }
         
         public async Task<Forecast> Handle(GetForecastQuery request, CancellationToken cancellationToken)
@@ -26,23 +32,26 @@ namespace CleanApi.Core.CQRS
             if (temperatureRange is null)
                 throw new InvalidLocationError(request.Location);
 
-            var startDate = DateTime.Now.Date.AddHours(12);
-            var details = GenerateForecastDetails(startDate, request.Days, temperatureRange);
+            var startDate = _nowProvider.GetTodayMidDay();
+            
+            var details = Enumerable.Range(1, request.Days)
+                .Select(index => GenerateForecastForDay(startDate.AddDays(index),temperatureRange))
+                .ToArray();
+            
             return new Forecast(request.Location, details);
         }
 
-        private static IEnumerable<ForecastDetails> GenerateForecastDetails(DateTime startDate, int days, 
-            TemperatureRange temperatureRange)
+        private ForecastDetails GenerateForecastForDay(DateTime day, TemperatureRange temperatureRange)
         {
-            var rng = new Random();
-            var details = Enumerable.Range(1, days)
-                .Select(index => new ForecastDetails(
-                    date: startDate.AddDays(index),
-                    temperature: rng.Next(temperatureRange.Low, temperatureRange.High),
-                    summary: Summaries[rng.Next(Summaries.Length)]
-                ))
-                .ToArray();
-            return details;
+            var temperatureAvg = _randomizer.GenInRange(temperatureRange.Low, temperatureRange.High+1);
+            return new ForecastDetails
+            {
+                Date = day,
+                TemperatureAvg = temperatureAvg,
+                TemperatureDay = Math.Min(temperatureAvg + 5, temperatureRange.High),
+                TemperatureNight = Math.Max(temperatureAvg - 5, temperatureRange.Low),
+                Summary = Summaries[_randomizer.GenInt(Summaries.Length)]
+            };
         }
 
         private static readonly string[] Summaries = new[]
