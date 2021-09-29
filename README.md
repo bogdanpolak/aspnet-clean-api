@@ -17,7 +17,7 @@ ASP.NET Core API using MediatR and FluentValidation to separate concerns with mi
     dotnet add package FluentValidation.DependencyInjectionExtensions
     ```
 2. Copy/Create unit:
-   * `ValidationErrorHandlingMiddleware.cs` - [link](CleanApi/ValidationErrorHandlingMiddleware.cs)
+   * `ValidationErrorHandlingMiddleware.cs` - [link](CleanApi/WebApi/ValidationErrorHandlingMiddleware.cs)
    * *Recommendations:* 
      * *extract ValidationPipelineBehavior class into the separate unit*
      * *move it into Core/Behaviors directory*

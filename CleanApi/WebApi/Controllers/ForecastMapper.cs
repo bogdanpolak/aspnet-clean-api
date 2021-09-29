@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using CleanApi.Core.Models;
 
-namespace CleanApi.Controllers
+namespace CleanApi.WebApi.Controllers
 {
     public static class ForecastMapper
     {

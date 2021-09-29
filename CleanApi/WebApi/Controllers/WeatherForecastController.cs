@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CleanApi.Controllers
+namespace CleanApi.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]

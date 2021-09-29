@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CleanApi.Controllers
+namespace CleanApi.WebApi.Controllers
 {
     public class ForecastResponse
     {

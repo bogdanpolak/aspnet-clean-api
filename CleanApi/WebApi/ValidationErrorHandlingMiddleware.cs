@@ -29,7 +29,7 @@ using Microsoft.AspNetCore.Http;
         public class GetForecastQueryValidator : AbstractValidator<GetForecastQuery> { ... }
  */
 
-namespace CleanApi 
+namespace CleanApi.WebApi 
 {
     public class ValidationErrorHandlingMiddleware 
     {

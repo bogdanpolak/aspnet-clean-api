@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using CleanApi.Core.Exceptions;
 using Microsoft.AspNetCore.Http;
 
-namespace CleanApi
+namespace CleanApi.WebApi
 {
     public class CoreErrorHandlingMiddleware
     {

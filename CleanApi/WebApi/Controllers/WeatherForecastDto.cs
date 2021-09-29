@@ -1,6 +1,6 @@
 using System;
 
-namespace CleanApi.Controllers
+namespace CleanApi.WebApi.Controllers
 {
     public class WeatherForecastDto
     {
