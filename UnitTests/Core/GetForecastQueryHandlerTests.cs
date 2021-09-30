@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CleanApi.Core.Contracts;
 using CleanApi.Core.CQRS;
+using CleanApi.Core.Exceptions;
 using CleanApi.Core.Models;
 using FluentAssertions;
 using Moq;
@@ -33,7 +34,7 @@ namespace UnitTests.Core
         }
         
         [Fact] 
-        public async Task Handle_Generate10DaysForecast()
+        public async Task Handle_Generates_10xDaysForecast()
         {
             var request = new GetForecastQuery("country/city", 10);
             SetupTemperatureRangeForLocation(request.Location);
@@ -45,7 +46,7 @@ namespace UnitTests.Core
         }
 
         [Fact] 
-        public async Task Handler_WillGenerate_3xFollowingDays()
+        public async Task Handler_Generates_3xFollowingDays()
         {
             var request = new GetForecastQuery("country/city", 3);
             SetupTemperatureRangeForLocation(request.Location);
@@ -63,7 +64,7 @@ namespace UnitTests.Core
         }
 
         [Fact] 
-        public async Task Handler_WillGenerate_CorrectTemperatures()
+        public async Task Handler_Generates_CorrectTemperatures()
         {
             var request = new GetForecastQuery("country/city", 3);
             SetupTemperatureRangeForLocation(request.Location, -6, 6);
@@ -79,7 +80,32 @@ namespace UnitTests.Core
             nightTemperatures.Should().Equal(-5, -5, -5);
             dayTemperatures.Should().Equal(5, 5, 5);
         }
-        
+
+        [Fact]
+        public async Task Handler_Generates_CorrectSummaries()
+        {
+            var request = new GetForecastQuery("country/city", 2);
+            SetupTemperatureRangeForLocation(request.Location);
+            _fakeRandomizer.CurrentStrategy = FakeRandomizer.Strategy.GenMinimal;
+
+            var forecast = await _sut.Handle(request, CancellationToken.None);
+            var forecastSummaries = forecast.Details.Select(x => x.Summary);
+
+            forecastSummaries.Should().Equal("Freezing", "Freezing");
+        }
+
+        [Fact]
+        public async Task Handler_InvalidLocation_WillFail()
+        {
+            var request = new GetForecastQuery("country/city", 3);
+
+            var locationError = await Assert.ThrowsAsync<InvalidLocationError>(
+                () => _sut.Handle(request, CancellationToken.None));
+
+            locationError.Location.Should().Be("country/city");
+            locationError.Message.Should().StartWith("Invalid location: 'country/city'.");
+        }
+
         private void SetupTemperatureRangeForLocation(string location, int lowTemperature = -5, int highTemperature = 10)
         {
             _climateRepositoryMock

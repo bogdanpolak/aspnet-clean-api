@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,7 +33,7 @@ namespace CleanApi.Core.CQRS
 
             var startDate = _nowProvider.GetTodayMidDay();
             
-            var details = Enumerable.Range(1, request.Days)
+            var details = Enumerable.Range(1, request.Days ?? 0)
                 .Select(index => GenerateForecastForDay(startDate.AddDays(index),temperatureRange))
                 .ToArray();
             

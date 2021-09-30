@@ -6,9 +6,9 @@ namespace CleanApi.Core.CQRS
     public class GetForecastQuery : IRequest<Forecast> 
     {
         public string Location;
-        public int Days;
+        public int? Days;
 
-        public GetForecastQuery(string location, int days)
+        public GetForecastQuery(string location, int? days)
         {
             Location = location;
             Days = days;

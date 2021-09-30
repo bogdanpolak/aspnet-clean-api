@@ -11,6 +11,7 @@ namespace CleanApi.Core.CQRS
                 .Matches(@"\w+\/\w+")
                 .WithMessage("{PropertyName} has incorrect format, expected: country/city");
             RuleFor(x => x.Days)
+                .NotNull()
                 .InclusiveBetween(1, 14);
         }
     }
