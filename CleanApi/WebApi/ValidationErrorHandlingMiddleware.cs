@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 /*
  * Add packages:
@@ -54,12 +56,22 @@ namespace CleanApi.WebApi
 
         private static Task HandleValidationExceptionAsync(HttpContext context, ValidationException exception)
         {
-            var msg = JsonSerializer.Serialize(
-                new {
-                    Errors = exception.Errors.Select(err => err.ErrorMessage)
-                });
-            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            context.Response.ContentType = "application/problem+json";
+
+            var errors = exception.Errors
+                .Select(err => err.ErrorMessage)
+                .ToList();
+            var problemDetails = new ProblemDetails
+            {
+                Type = "https://example.com/problems/validation-error",
+                Title = "Invalid API parameters was provided",
+                Detail = exception.Message,
+                // Instance = "/account/12345/messages/abc", more info: https://datatracker.ietf.org/doc/html/rfc7807
+            };
+            problemDetails.Extensions.Add("errors",errors);
+            
+            var msg = JsonSerializer.Serialize(problemDetails);
             return context.Response.WriteAsync(msg);
         }
     }

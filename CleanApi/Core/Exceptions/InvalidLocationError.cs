@@ -2,16 +2,17 @@
 
 namespace CleanApi.Core.Exceptions
 {
-    public class InvalidLocationError : CoreException
+    public class InvalidLocationError : CoreValidationError
     {
-        public string Location { get; }
-
-        public InvalidLocationError(string location) : base(
-            $"Invalid location: '{location}'. Provide one of the following locations:" +
-            " 'poland/cracow', 'india/chennai', 'usa/richfield', 'usa/cleveland', 'usa/newyork'," +
-            " 'usa/sanfranciso', 'usa/redmond'")
+        private const string InvalidLocationMessage = 
+            "{0} must be one of the following:" +
+            " 'poland/cracow', 'india/chennai', 'usa/richfield'," +
+            " 'usa/cleveland', 'usa/newyork'," +
+            " 'usa/sanfranciso', 'usa/redmond'. You entered '{1}'";
+        
+        public InvalidLocationError(string propertyName, string actualLocation) : base(
+            propertyName, string.Format(InvalidLocationMessage, propertyName, actualLocation))
         {
-            Location = location;
         }
     }
 }

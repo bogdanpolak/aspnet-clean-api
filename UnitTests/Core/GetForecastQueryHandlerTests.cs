@@ -102,8 +102,8 @@ namespace UnitTests.Core
             var locationError = await Assert.ThrowsAsync<InvalidLocationError>(
                 () => _sut.Handle(request, CancellationToken.None));
 
-            locationError.Location.Should().Be("country/city");
-            locationError.Message.Should().StartWith("Invalid location: 'country/city'.");
+            locationError.PropertyName.Should().Be(nameof(request.Location));
+            locationError.Message.Should().StartWith("Location must be one of the following:");
         }
 
         private void SetupTemperatureRangeForLocation(string location, int lowTemperature = -5, int highTemperature = 10)

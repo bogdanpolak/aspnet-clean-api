@@ -29,7 +29,7 @@ namespace CleanApi.Core.CQRS
         {
             var temperatureRange = await _climateRepository.GetTemperaturesAsync(request.Location, cancellationToken);
             if (temperatureRange is null)
-                throw new InvalidLocationError(request.Location);
+                throw new InvalidLocationError(nameof(request.Location),request.Location);
 
             var startDate = _nowProvider.GetTodayMidDay();
             

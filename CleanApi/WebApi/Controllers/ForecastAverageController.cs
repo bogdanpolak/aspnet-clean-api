@@ -25,7 +25,7 @@ namespace CleanApi.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ForecastAverageResponse> Get(string location, int days)
+        public async Task<ForecastAverageResponse> Get(string location, int? days)
         {
             _logger.LogInformation("[{request}] location='{location}' days={days}", 
                 "GET ForecastAverage", location, days);
